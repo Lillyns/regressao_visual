@@ -1,0 +1,83 @@
+{
+  "id": "backstop_default",
+  "viewports": [
+    {
+      "label": "phone",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "label": "desktop",
+      "width": 1680,
+      "height": 1050
+    }
+  ],
+  "onBeforeScript": "puppet/onBefore.js",
+  "onReadyScript": "puppet/onReady.js",
+  "scenarios": [
+    {
+      "label": "Initial Status",
+      "url": "https://automacaocombatista.herokuapp.com/buscaelementos/radioecheckbox",
+      "delay": 9000,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Click red",
+      "url": "https://automacaocombatista.herokuapp.com/buscaelementos/radioecheckbox",
+      "clickSelector": "#red",
+      "delay": 9000,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Checkboxes",
+      "url": "https://automacaocombatista.herokuapp.com/buscaelementos/radioecheckbox",
+      "clickSelector": ["#purple", "#grey", "#black","#white"],
+      "delay": 9000,
+      "misMatchThreshold" : 0.3,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Select Browser",
+      "onReadyScript": "puppet/custom/selectBrowser.js",
+      "delay": 9000,
+      "url": "https://automacaocombatista.herokuapp.com/buscaelementos/dropdowneselect",
+      "delay": 9000,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Input data",
+      "onReadyScript": "puppet/custom/typeData.js",
+      "url": "https://automacaocombatista.herokuapp.com/users/new",
+      "delay": 9000,
+      "misMatchThreshold" : 0.2,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Fill all mandatory fields",
+      "onReadyScript": "puppet/custom/fillMandatoryFields.js",
+      "url": "https://automacaocombatista.herokuapp.com/users/new",
+      "delay": 9000,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": ["--no-sandbox"]
+  },
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}
